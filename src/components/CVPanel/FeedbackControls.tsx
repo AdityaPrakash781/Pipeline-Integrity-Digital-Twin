@@ -32,11 +32,11 @@ export default function FeedbackControls({ segmentId, cvData }: FeedbackControls
     };
 
     return (
-        <div className="bg-industrial-900 rounded-lg p-4">
+        <div className="inner-card p-4">
             <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-slate-200">Human Verification</h3>
+                <h3 className="text-sm font-semibold text-zinc-200">Human Verification</h3>
                 {feedbackQueue.length > 0 && (
-                    <span className="status-badge bg-healthy/20 text-healthy">
+                    <span className="status-badge bg-zinc-700/60 text-zinc-300 border border-zinc-600/50">
                         {feedbackQueue.length} in queue
                     </span>
                 )}
@@ -67,12 +67,12 @@ export default function FeedbackControls({ segmentId, cvData }: FeedbackControls
             </div>
 
             {feedbackGiven && (
-                <div className="mt-3 text-center text-sm text-healthy animate-pulse">
+                <div className="mt-3 text-center text-sm text-zinc-300 animate-pulse">
                     ✓ Feedback recorded
                 </div>
             )}
 
-            <div className="mt-4 text-xs text-slate-400 italic">
+            <div className="mt-4 text-xs text-zinc-400 italic">
                 Your feedback helps improve the YOLOv8-Seg model accuracy
             </div>
         </div>

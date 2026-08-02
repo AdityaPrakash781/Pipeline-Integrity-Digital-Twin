@@ -7,14 +7,14 @@ export default function VideoFeed({ segmentId }: { segmentId: string }) {
     // In production, this would be a live video stream or recorded footage
 
     return (
-        <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center relative">
+        <div className="w-full h-full bg-gradient-to-br from-zinc-900 via-industrial-950 to-black flex items-center justify-center relative">
             {/* Mock pipeline cross-section visualization */}
             <svg className="w-3/4 h-3/4" viewBox="0 0 200 200">
                 {/* Outer pipe wall */}
-                <circle cx="100" cy="100" r="80" fill="#475569" stroke="#64748b" strokeWidth="2" />
+                <circle cx="100" cy="100" r="80" fill="#38383c" stroke="#505050" strokeWidth="2" />
 
                 {/* Inner pipe wall */}
-                <circle cx="100" cy="100" r="65" fill="#1e293b" stroke="#334155" strokeWidth="2" />
+                <circle cx="100" cy="100" r="65" fill="#0f0f10" stroke="#2a2a2d" strokeWidth="2" />
 
                 {/* Mock corrosion regions (varies by segment) */}
                 {segmentId.includes('3') || segmentId.includes('7') ? (
@@ -25,7 +25,7 @@ export default function VideoFeed({ segmentId }: { segmentId: string }) {
                 ) : null}
 
                 {/* Scan line animation */}
-                <line x1="100" y1="0" x2="100" y2="200" stroke="#22d3ee" strokeWidth="1" opacity="0.3">
+                <line x1="100" y1="0" x2="100" y2="200" stroke="#10b981" strokeWidth="1" opacity="0.4">
                     <animateTransform
                         attributeName="transform"
                         type="rotate"

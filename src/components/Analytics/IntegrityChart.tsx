@@ -30,26 +30,27 @@ export default function IntegrityChart({ pinnData }: IntegrityChartProps) {
     const todayDate = chartData[todayIndex]?.time || '';
 
     return (
+        <div style={{ background: '#0f0f10', borderRadius: '0.5rem' }}>
         <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <LineChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }} style={{ background: '#0f0f10' }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff" strokeOpacity={0.25} />
                 <XAxis
                     dataKey="time"
-                    stroke="#94a3b8"
+                    stroke="#a1a1aa"
                     style={{ fontSize: '12px' }}
                 />
                 <YAxis
-                    stroke="#94a3b8"
+                    stroke="#a1a1aa"
                     domain={[0, 100]}
-                    label={{ value: 'Integrity (%)', angle: -90, position: 'insideLeft', style: { fill: '#94a3b8' } }}
+                    label={{ value: 'Integrity (%)', angle: -90, position: 'insideLeft', style: { fill: '#a1a1aa' } }}
                     style={{ fontSize: '12px' }}
                 />
                 <Tooltip
                     contentStyle={{
-                        backgroundColor: '#1e293b',
-                        border: '1px solid #334155',
+                        backgroundColor: '#171718',
+                        border: '1px solid #38383c',
                         borderRadius: '8px',
-                        color: '#f1f5f9'
+                        color: '#f4f4f5'
                     }}
                     formatter={(value: any) => [`${value?.toFixed(1)}%`, '']}
                 />
@@ -61,18 +62,18 @@ export default function IntegrityChart({ pinnData }: IntegrityChartProps) {
                 {/* Today marker */}
                 <ReferenceLine
                     x={todayDate}
-                    stroke="#22d3ee"
+                    stroke="#71717a"
                     strokeDasharray="3 3"
-                    label={{ value: 'Today', position: 'top', fill: '#22d3ee', fontSize: 12 }}
+                    label={{ value: 'Today', position: 'top', fill: '#a1a1aa', fontSize: 12 }}
                 />
 
                 {/* Historical data line */}
                 <Line
                     type="monotone"
                     dataKey="historical"
-                    stroke="#3b82f6"
+                    stroke="#a1a1aa"
                     strokeWidth={2}
-                    dot={{ fill: '#3b82f6', r: 3 }}
+                    dot={{ fill: '#a1a1aa', r: 3 }}
                     name="Historical Sensor Integrity"
                     connectNulls={false}
                 />
@@ -90,5 +91,6 @@ export default function IntegrityChart({ pinnData }: IntegrityChartProps) {
                 />
             </LineChart>
         </ResponsiveContainer>
+        </div>
     );
 }

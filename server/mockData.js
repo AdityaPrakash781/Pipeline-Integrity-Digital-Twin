@@ -14,8 +14,9 @@ function generateSegments() {
 
     for (let i = 0; i < SEGMENT_COUNT; i++) {
         const segmentId = `SEG-${String(i + 1).padStart(3, '0')}`;
-        const integrity = 0.4 + Math.random() * 0.5; // 0.4 to 0.9
-
+        // Generate a random integrity score between 0.1 and 0.95
+        // This ensures a full mix of Critical, Warning, Mild, and Healthy segments
+        const integrity = 0.1 + (Math.random() * 0.85);
         segments.push({
             segment_id: segmentId,
             position: [i * SEGMENT_LENGTH - (SEGMENT_COUNT * SEGMENT_LENGTH) / 2, 0, 0],

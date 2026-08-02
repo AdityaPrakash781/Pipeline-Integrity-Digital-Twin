@@ -29,8 +29,8 @@ export const fragmentShader = `
   vec3 getIntegrityColor(float integrity) {
     vec3 critical = vec3(0.937, 0.267, 0.267); // #ef4444 red-500
     vec3 warning = vec3(0.961, 0.620, 0.043);  // #f59e0b amber-500
-    vec3 mild = vec3(0.024, 0.714, 0.831);     // #06b6d4 cyan-500
-    vec3 healthy = vec3(0.133, 0.827, 0.933);  // #22d3ee cyan-400
+    vec3 mild = vec3(0.063, 0.725, 0.506);     // #10b981 emerald-500
+    vec3 healthy = vec3(0.231, 0.510, 0.965);  // #3b82f6 blue-500
     
     if (integrity >= 0.8) {
       // Healthy range: interpolate between healthy and mild
@@ -70,10 +70,10 @@ export const fragmentShader = `
     // Final color with lighting
     vec3 finalColor = baseColor * lighting + metallicHighlight;
     
-    // Selection highlight (pulsing glow)
+    // Selection highlight (pulsing glow in metallic silver)
     if (uSelected) {
       float pulse = 0.5 + 0.5 * sin(uTime * 3.0);
-      finalColor += vec3(0.2, 0.6, 1.0) * pulse * 0.3;
+      finalColor += vec3(0.9, 0.9, 0.95) * pulse * 0.4;
     }
     
     gl_FragColor = vec4(finalColor, 1.0);

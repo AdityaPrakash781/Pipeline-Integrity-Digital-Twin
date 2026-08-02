@@ -1,48 +1,59 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Grid } from '@react-three/drei';
 import Pipeline from './Pipeline';
+import SeverityScale from './SeverityScale';
 
 /**
  * Main 3D scene containing the pipeline digital twin
- * Features orbital camera controls and industrial grid background
+ * Features orbital camera controls, industrial grid background, and severity scale legend
  */
 export default function PipelineScene() {
     return (
-        <div className="w-full h-full bg-industrial-900">
-            <Canvas>
-                {/* Camera setup */}
-                <PerspectiveCamera makeDefault position={[15, 8, 15]} fov={50} />
+        <div className="w-full h-full bg-black flex flex-col overflow-hidden">
+            {/* 3D Canvas area */}
+            <div className="flex-1 w-full min-h-0 relative bg-black">
+                <Canvas>
+                    {/* Background color */}
+                    <color attach="background" args={['#000000']} />
 
-                {/* Orbital controls with damping for smooth movement */}
-                <OrbitControls
-                    enableDamping
-                    dampingFactor={0.05}
-                    minDistance={5}
-                    maxDistance={50}
-                    maxPolarAngle={Math.PI / 2}
-                />
+                    {/* Camera setup */}
+                    <PerspectiveCamera makeDefault position={[15, 8, 15]} fov={50} />
 
-                {/* Lighting */}
-                <ambientLight intensity={0.4} />
-                <directionalLight position={[10, 10, 5]} intensity={0.8} castShadow />
-                <directionalLight position={[-10, 5, -5]} intensity={0.3} />
+                    {/* Orbital controls with damping for smooth movement */}
+                    <OrbitControls
+                        enableDamping
+                        dampingFactor={0.05}
+                        minDistance={5}
+                        maxDistance={50}
+                        maxPolarAngle={Math.PI / 2}
+                    />
 
-                {/* Grid floor for spatial reference */}
-                <Grid
-                    args={[50, 50]}
-                    position={[0, -2, 0]}
-                    cellColor="#334155"
-                    sectionColor="#475569"
-                    fadeDistance={30}
-                    fadeStrength={1}
-                />
+                    {/* Lighting */}
+                    <ambientLight intensity={0.4} />
+                    <directionalLight position={[10, 10, 5]} intensity={0.8} castShadow />
+                    <directionalLight position={[-10, 5, -5]} intensity={0.3} />
 
-                {/* Pipeline */}
-                <Pipeline />
+                    {/* White grid floor for spatial reference */}
+                    <Grid
+                        args={[50, 50]}
+                        position={[0, -2, 0]}
+                        cellColor="#666666"
+                        sectionColor="#ffffff"
+                        fadeDistance={35}
+                        fadeStrength={1}
+                    />
 
-                {/* Fog for depth perception */}
-                <fog attach="fog" args={['#0f172a', 20, 50]} />
-            </Canvas>
+                    {/* Pipeline */}
+                    <Pipeline />
+
+                    {/* Black fog for depth perception */}
+                    <fog attach="fog" args={['#000000', 20, 50]} />
+                </Canvas>
+            </div>
+
+            {/* Severity scale legend bar directly below the 3D representation */}
+            <SeverityScale />
         </div>
     );
 }
+

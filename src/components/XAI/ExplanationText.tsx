@@ -53,7 +53,7 @@ export default function ExplanationText({ xaiData }: ExplanationTextProps) {
         return parts.map((part, index) => {
             if (part.startsWith('**') && part.endsWith('**')) {
                 return (
-                    <strong key={index} className="text-healthy font-semibold">
+                    <strong key={index} className="text-emerald-400 font-semibold">
                         {part.slice(2, -2)}
                     </strong>
                 );
@@ -63,7 +63,7 @@ export default function ExplanationText({ xaiData }: ExplanationTextProps) {
     };
 
     return (
-        <div className="text-sm text-slate-300 leading-relaxed">
+        <div className="text-sm text-zinc-300 leading-relaxed">
             {renderExplanation()}
         </div>
     );

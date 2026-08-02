@@ -6,8 +6,8 @@ import type { UrgencyLevel } from '../types';
  * 0.0 = Critical (red)
  */
 export function getIntegrityColor(integrity: number): string {
-    if (integrity >= 0.8) return '#22d3ee'; // cyan-400 (healthy)
-    if (integrity >= 0.6) return '#06b6d4'; // cyan-500 (mild)
+    if (integrity >= 0.8) return '#3b82f6'; // blue-500 (healthy)
+    if (integrity >= 0.6) return '#10b981'; // emerald-500 (mild)
     if (integrity >= 0.3) return '#f59e0b'; // amber-500 (warning)
     return '#ef4444'; // red-500 (critical)
 }
@@ -40,7 +40,7 @@ export function getUrgencyColor(level: UrgencyLevel): string {
         case 'critical': return '#dc2626'; // red-600
         case 'high': return '#ef4444'; // red-500
         case 'medium': return '#f59e0b'; // amber-500
-        case 'low': return '#22d3ee'; // cyan-400
+        case 'low': return '#3b82f6'; // blue-500
     }
 }
 

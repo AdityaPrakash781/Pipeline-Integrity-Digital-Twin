@@ -21,13 +21,13 @@ export default function SegmentTooltip() {
 
     return (
         <Html position={segment.position}>
-            <div className="bg-industrial-800 border border-industrial-700 rounded-lg px-3 py-2 shadow-xl pointer-events-none">
-                <div className="text-xs font-semibold text-healthy mb-1">{segment.segment_id}</div>
-                <div className="text-xs text-slate-300">
+            <div className="bg-industrial-950 border border-industrial-700/80 rounded-lg px-3 py-2 shadow-xl pointer-events-none">
+                <div className="text-xs font-semibold text-emerald-400 mb-1">{segment.segment_id}</div>
+                <div className="text-xs text-zinc-300">
                     Integrity: {formatPercentage(segment.integrity)}
                 </div>
                 {segment.pinn && (
-                    <div className="text-xs text-slate-300">
+                    <div className="text-xs text-zinc-300">
                         RUL: {segment.pinn.remaining_useful_life_days} days
                     </div>
                 )}

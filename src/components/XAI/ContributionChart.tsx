@@ -13,37 +13,39 @@ export default function ContributionChart({ contributors }: ContributionChartPro
         .sort((a, b) => b.contribution_pct - a.contribution_pct)
         .slice(0, 3);
 
-    // Color palette for bars
-    const colors = ['#ef4444', '#f59e0b', '#22d3ee'];
+    // Color palette for bars — muted metallic palette, no neon
+    const colors = ['#ef4444', '#f59e0b', '#a1a1aa'];
 
     return (
+        <div style={{ background: '#0f0f10', borderRadius: '0.5rem' }}>
         <ResponsiveContainer width="100%" height={200}>
             <BarChart
                 data={topContributors}
                 layout="vertical"
                 margin={{ top: 5, right: 30, left: 10, bottom: 5 }}
+                style={{ background: '#0f0f10' }}
             >
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff" strokeOpacity={0.08} horizontal={false} />
                 <XAxis
                     type="number"
                     domain={[0, 100]}
-                    stroke="#94a3b8"
+                    stroke="#71717a"
                     style={{ fontSize: '12px' }}
                     tickFormatter={(value) => `${value}%`}
                 />
                 <YAxis
                     type="category"
                     dataKey="feature"
-                    stroke="#94a3b8"
+                    stroke="#71717a"
                     width={150}
                     style={{ fontSize: '12px' }}
                 />
                 <Tooltip
                     contentStyle={{
-                        backgroundColor: '#1e293b',
-                        border: '1px solid #334155',
+                        backgroundColor: '#171718',
+                        border: '1px solid #38383c',
                         borderRadius: '8px',
-                        color: '#f1f5f9'
+                        color: '#f4f4f5'
                     }}
                     formatter={(value: any) => [`${value.toFixed(1)}%`, 'Contribution']}
                 />
@@ -54,5 +56,6 @@ export default function ContributionChart({ contributors }: ContributionChartPro
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
+        </div>
     );
 }

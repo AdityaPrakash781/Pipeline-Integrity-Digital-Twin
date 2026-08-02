@@ -20,14 +20,11 @@ export default function RULWidget({ rul }: RULWidgetProps) {
 
     return (
         <div
-            className="rounded-lg p-6 relative overflow-hidden"
-            style={{
-                backgroundColor: `${color}15`,
-                borderLeft: `4px solid ${color}`
-            }}
+            className="inner-card p-6 relative overflow-hidden"
+            style={{ borderLeft: `4px solid ${color}` }}
         >
             <div className="relative z-10">
-                <div className="text-sm text-slate-400 mb-2">Remaining Useful Life</div>
+                <div className="text-sm text-zinc-400 mb-2">Remaining Useful Life</div>
 
                 <div className="flex items-baseline gap-3 mb-3">
                     <div
@@ -36,7 +33,7 @@ export default function RULWidget({ rul }: RULWidgetProps) {
                     >
                         {rul}
                     </div>
-                    <div className="text-2xl text-slate-400">days</div>
+                    <div className="text-2xl text-zinc-400">days</div>
                 </div>
 
                 <div className="flex items-center gap-2 mb-4">
@@ -51,7 +48,7 @@ export default function RULWidget({ rul }: RULWidgetProps) {
                     </span>
                 </div>
 
-                <div className="text-xs text-slate-400 italic">
+                <div className="text-xs text-zinc-400 italic">
                     <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>

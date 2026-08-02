@@ -17,13 +17,13 @@ export default function Sidebar() {
 
     if (collapsed) {
         return (
-            <div className="bg-industrial-800 border-r border-industrial-700 p-2 flex flex-col items-center">
+            <div className="bg-industrial-950 border-r border-industrial-700/80 p-2 flex flex-col items-center">
                 <button
                     onClick={() => setCollapsed(false)}
-                    className="p-2 hover:bg-industrial-700 rounded transition-colors"
+                    className="p-2 hover:bg-industrial-800 rounded transition-colors"
                     title="Expand sidebar"
                 >
-                    <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                     </svg>
                 </button>
@@ -32,15 +32,15 @@ export default function Sidebar() {
     }
 
     return (
-        <div className="bg-industrial-800 border-r border-industrial-700 w-64 flex flex-col">
-            <div className="p-4 border-b border-industrial-700 flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-slate-200">Telemetry</h2>
+        <div className="bg-industrial-950 border-r border-industrial-700/80 w-64 flex flex-col shadow-xl">
+            <div className="p-4 border-b border-industrial-700/80 flex items-center justify-between bg-industrial-900/60">
+                <h2 className="text-sm font-semibold text-zinc-200">Telemetry</h2>
                 <button
                     onClick={() => setCollapsed(true)}
-                    className="p-1 hover:bg-industrial-700 rounded transition-colors"
+                    className="p-1 hover:bg-industrial-800 rounded transition-colors"
                     title="Collapse sidebar"
                 >
-                    <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                     </svg>
                 </button>
@@ -49,19 +49,19 @@ export default function Sidebar() {
             <div className="flex-1 p-4 space-y-4 overflow-auto">
                 {/* Connection Status */}
                 <div>
-                    <div className="text-xs text-slate-400 mb-2">Connection</div>
-                    <div className={`status-badge ${wsConnected ? 'bg-healthy/20 text-healthy' : 'bg-critical/20 text-critical'}`}>
+                    <div className="text-xs text-zinc-400 mb-2">Connection</div>
+                    <div className={`status-badge ${wsConnected ? 'bg-zinc-700/60 text-zinc-300 border-zinc-600/50' : 'bg-critical/20 text-critical border-critical/30'}`}>
                         {wsConnected ? '● Online' : '○ Offline'}
                     </div>
                 </div>
 
                 {/* Segment Statistics */}
                 <div>
-                    <div className="text-xs text-slate-400 mb-2">Segment Status</div>
+                    <div className="text-xs text-zinc-400 mb-2">Segment Status</div>
                     <div className="space-y-2">
                         <div className="flex items-center justify-between text-sm">
-                            <span className="text-slate-300">Total</span>
-                            <span className="font-semibold text-slate-100">{segments.size}</span>
+                            <span className="text-zinc-300">Total</span>
+                            <span className="font-semibold text-zinc-100">{segments.size}</span>
                         </div>
                         {criticalCount > 0 && (
                             <div className="flex items-center justify-between text-sm">
@@ -80,18 +80,18 @@ export default function Sidebar() {
 
                 {/* Feedback Queue */}
                 <div>
-                    <div className="text-xs text-slate-400 mb-2">Feedback Queue</div>
-                    <div className="text-2xl font-bold text-healthy">
+                    <div className="text-xs text-zinc-400 mb-2">Feedback Queue</div>
+                    <div className="text-2xl font-bold text-zinc-100">
                         {feedbackQueue.length}
                     </div>
-                    <div className="text-xs text-slate-400 mt-1">
+                    <div className="text-xs text-zinc-400 mt-1">
                         Pending retraining
                     </div>
                 </div>
 
                 {/* System Info */}
-                <div className="pt-4 border-t border-industrial-700">
-                    <div className="text-xs text-slate-400 space-y-1">
+                <div className="pt-4 border-t border-industrial-700/80">
+                    <div className="text-xs text-zinc-400 space-y-1">
                         <div>YOLOv8-Seg: Active</div>
                         <div>PINN Engine: Running</div>
                         <div>XAI Module: Enabled</div>

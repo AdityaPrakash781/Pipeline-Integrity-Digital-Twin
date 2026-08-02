@@ -10,9 +10,9 @@ export default function ConfidenceMeter({ confidence }: ConfidenceMeterProps) {
     const circumference = 2 * Math.PI * 45; // radius = 45
     const offset = circumference - (percentage / 100) * circumference;
 
-    // Color based on confidence
+    // Color based on confidence — muted neutrals, no neon
     const getColor = () => {
-        if (confidence >= 0.8) return '#22d3ee'; // cyan (high)
+        if (confidence >= 0.8) return '#d4d4d8'; // zinc-300 (neutral white-gray for high confidence)
         if (confidence >= 0.6) return '#f59e0b'; // amber (medium)
         return '#ef4444'; // red (low)
     };
@@ -27,7 +27,7 @@ export default function ConfidenceMeter({ confidence }: ConfidenceMeterProps) {
                     cx="48"
                     cy="48"
                     r="45"
-                    stroke="#334155"
+                    stroke="#38383c"
                     strokeWidth="8"
                     fill="none"
                 />
@@ -56,7 +56,7 @@ export default function ConfidenceMeter({ confidence }: ConfidenceMeterProps) {
                     >
                         {percentage.toFixed(0)}
                     </div>
-                    <div className="text-xs text-slate-400">%</div>
+                    <div className="text-xs text-zinc-400">%</div>
                 </div>
             </div>
         </div>
