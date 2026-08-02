@@ -1,12 +1,13 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Mesh, ShaderMaterial } from 'three';
+import { Mesh, ShaderMaterial, Vector3, Quaternion, Euler } from 'three';
 import { usePipelineStore } from '../../store/usePipelineStore';
 import { vertexShader, fragmentShader } from '../../shaders/integrityShader';
 
 interface PipelineSegmentProps {
     segmentId: string;
     position: [number, number, number];
+    direction?: [number, number, number];
     integrity: number;
 }
 
@@ -14,7 +15,7 @@ interface PipelineSegmentProps {
  * Individual pipeline segment with custom integrity shader
  * Handles click selection and hover effects
  */
-export default function PipelineSegment({ segmentId, position, integrity }: PipelineSegmentProps) {
+export default function PipelineSegment({ segmentId, position, direction, integrity }: PipelineSegmentProps) {
     const meshRef = useRef<Mesh>(null);
     const materialRef = useRef<ShaderMaterial>(null);
     const [hovered, setHovered] = useState(false);
@@ -23,6 +24,18 @@ export default function PipelineSegment({ segmentId, position, integrity }: Pipe
     const selectSegment = usePipelineStore(state => state.selectSegment);
 
     const isSelected = selectedSegmentId === segmentId;
+
+    // Calculate quaternion from direction (cylinder is aligned along Y axis)
+    const quaternion = useMemo(() => {
+        if (!direction) {
+            const q = new Quaternion();
+            q.setFromEuler(new Euler(0, 0, Math.PI / 2));
+            return q;
+        }
+        const dir = new Vector3(direction[0], direction[1], direction[2]).normalize();
+        const up = new Vector3(0, 1, 0);
+        return new Quaternion().setFromUnitVectors(up, dir);
+    }, [direction]);
 
     // Update shader uniforms every frame
     useFrame((state) => {
@@ -43,7 +56,7 @@ export default function PipelineSegment({ segmentId, position, integrity }: Pipe
         <mesh
             ref={meshRef}
             position={position}
-            rotation={[0, 0, Math.PI / 2]} // Rotate to align along X-axis
+            quaternion={quaternion}
             onClick={handleClick}
             onPointerOver={(e) => {
                 e.stopPropagation();

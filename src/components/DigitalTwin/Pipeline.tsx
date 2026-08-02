@@ -18,6 +18,7 @@ export default function Pipeline() {
                     key={segment.segment_id}
                     segmentId={segment.segment_id}
                     position={segment.position}
+                    direction={segment.direction}
                     integrity={segment.integrity}
                 />
             ))}

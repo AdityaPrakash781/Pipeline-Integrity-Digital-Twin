@@ -3,7 +3,7 @@
  * Simulates realistic ML model outputs for 10 pipeline segments
  */
 
-const SEGMENT_COUNT = 10;
+const SEGMENT_COUNT = 60; // Increased length for a more impressive pipeline
 const SEGMENT_LENGTH = 2; // meters
 
 /**
@@ -12,20 +12,56 @@ const SEGMENT_LENGTH = 2; // meters
 function generateSegments() {
     const segments = [];
 
+    // We trace the curve using small steps and place a segment every SEGMENT_LENGTH distance.
+    const amplitudeY = 3;
+    const frequencyY = 0.08;
+    const amplitudeZ = 8;
+    const frequencyZ = 0.12;
+
+    // Helper to get point on curve
+    const getPoint = (t) => {
+        return [
+            t,
+            Math.sin(t * frequencyY) * amplitudeY,
+            Math.sin(t * frequencyZ) * amplitudeZ
+        ];
+    };
+    
+    // Helper to get derivative (tangent) on curve
+    const getTangent = (t) => {
+        return [
+            1,
+            Math.cos(t * frequencyY) * frequencyY * amplitudeY,
+            Math.cos(t * frequencyZ) * frequencyZ * amplitudeZ
+        ];
+    };
+
+    let currentT = -(SEGMENT_COUNT * SEGMENT_LENGTH) / 2;
+
     for (let i = 0; i < SEGMENT_COUNT; i++) {
         const segmentId = `SEG-${String(i + 1).padStart(3, '0')}`;
         // Generate a random integrity score between 0.1 and 0.95
-        // This ensures a full mix of Critical, Warning, Mild, and Healthy segments
         const integrity = 0.1 + (Math.random() * 0.85);
+        
+        const position = getPoint(currentT);
+        const direction = getTangent(currentT);
+
         segments.push({
             segment_id: segmentId,
-            position: [i * SEGMENT_LENGTH - (SEGMENT_COUNT * SEGMENT_LENGTH) / 2, 0, 0],
+            position: position,
+            direction: direction,
             integrity: integrity,
             cv: generateCVOutput(segmentId, integrity),
             pinn: generatePINNOutput(segmentId, integrity),
             xai: generateXAIOutput(segmentId, integrity),
             lastUpdated: new Date().toISOString()
         });
+
+        // Advance currentT by approximately SEGMENT_LENGTH
+        // dt = ds / ||tangent||
+        const tangent = getTangent(currentT);
+        const tangentLength = Math.sqrt(tangent[0]*tangent[0] + tangent[1]*tangent[1] + tangent[2]*tangent[2]);
+        currentT += SEGMENT_LENGTH / tangentLength;
     }
 
     return segments;

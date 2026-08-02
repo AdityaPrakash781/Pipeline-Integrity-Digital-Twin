@@ -19,12 +19,12 @@ export default function PipelineScene() {
                     {/* Camera setup */}
                     <PerspectiveCamera makeDefault position={[15, 8, 15]} fov={50} />
 
-                    {/* Orbital controls with damping for smooth movement */}
+                    {/* Orbital controls: Left-click rotates, Right-click pans (moves) */}
                     <OrbitControls
                         enableDamping
                         dampingFactor={0.05}
-                        minDistance={5}
-                        maxDistance={50}
+                        minDistance={1}
+                        maxDistance={150}
                         maxPolarAngle={Math.PI / 2}
                     />
 
@@ -33,13 +33,13 @@ export default function PipelineScene() {
                     <directionalLight position={[10, 10, 5]} intensity={0.8} castShadow />
                     <directionalLight position={[-10, 5, -5]} intensity={0.3} />
 
-                    {/* White grid floor for spatial reference */}
+                    {/* White grid floor for spatial reference - scaled up for the longer pipeline */}
                     <Grid
-                        args={[50, 50]}
+                        args={[200, 200]}
                         position={[0, -2, 0]}
                         cellColor="#666666"
                         sectionColor="#ffffff"
-                        fadeDistance={35}
+                        fadeDistance={150}
                         fadeStrength={1}
                     />
 
@@ -47,7 +47,7 @@ export default function PipelineScene() {
                     <Pipeline />
 
                     {/* Black fog for depth perception */}
-                    <fog attach="fog" args={['#000000', 20, 50]} />
+                    <fog attach="fog" args={['#000000', 50, 200]} />
                 </Canvas>
             </div>
 

@@ -44,6 +44,7 @@ export interface XAIOutput {
 export interface SegmentData {
     segment_id: string;
     position: [number, number, number]; // 3D position in scene
+    direction?: [number, number, number]; // 3D direction vector
     integrity: number; // 0-1: current integrity (1 = healthy, 0 = critical)
     cv?: CVOutput;
     pinn?: PINNOutput;
