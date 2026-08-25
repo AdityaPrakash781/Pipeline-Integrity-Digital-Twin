@@ -13,6 +13,17 @@ export interface CVOutput {
     confidence: number; // 0-1: model confidence in detection
     polygon_mask: number[][]; // normalized [x, y] coordinates for corrosion region
     frame_timestamp: string; // ISO 8601 date string
+
+    // Real YOLOv8 inference fields (populated when Run YOLO Analysis is triggered)
+    corrosion_detected?: boolean;
+    class_id?: number;           // -1 if no detection
+    class_name?: string;         // 'BX'|'CJ'|'CK'|'OBB'|'PL'|'SG'|'ZW'|'none'
+    severity_score?: number;     // raw model confidence of best detection (0-1)
+    detection_rate?: number;     // frames_with_detections / total_frames
+    total_frames?: number;
+    frames_with_detections?: number;
+    yolo_mask_px?: number[][];   // raw pixel coords [x,y] from YOLO (640x640 space)
+    is_yolo_result?: boolean;    // true when populated by real inference
 }
 
 /**
@@ -67,8 +78,8 @@ export interface FeedbackEntry {
  * WebSocket message types
  */
 export interface WSMessage {
-    type: 'segment_update' | 'cv_detection' | 'pinn_forecast' | 'xai_explanation';
-    data: SegmentData | CVOutput | PINNOutput | XAIOutput;
+    type: 'segment_update' | 'cv_detection' | 'pinn_forecast' | 'xai_explanation' | 'initial_data';
+    data: SegmentData | CVOutput | PINNOutput | XAIOutput | SegmentData[];
     timestamp: string;
 }
 
@@ -84,4 +95,14 @@ export interface ChartDataPoint {
     time: string;
     value: number;
     label?: string;
+}
+
+/**
+ * YOLO Analysis API response
+ */
+export interface YOLOAnalysisResult {
+    segment_id: string;
+    cv: CVOutput;
+    success: boolean;
+    error?: string;
 }
